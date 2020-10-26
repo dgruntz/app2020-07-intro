@@ -1,0 +1,30 @@
+plugins {
+	id 'scala'
+}
+
+repositories {
+	jcenter()
+}
+
+dependencies {
+	implementation 'org.scala-lang:scala-library:2.13.3'
+	implementation 'jline:jline:2.14.6'
+}
+
+
+task zip(type: Zip) {
+	from projectDir
+	description "Creates student distribution."
+	group = 'distribution'
+
+	dependsOn wrapper
+
+	include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+
+	include 'src/main/java/book/*.java'
+	include 'src/main/scala/HelloWorld.scala'
+	include 'src/main/scala/ch/mse/app/*.scala'
+}
